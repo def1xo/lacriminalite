@@ -1,0 +1,51 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: lacriminalite-db
+    environment:
+      POSTGRES_DB: lacriminalite
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: secure_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - lacriminalite-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: lacriminalite-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - lacriminalite-network
+    command: redis-server --appendonly yes
+
+  adminer:
+    image: adminer:latest
+    container_name: lacriminalite-adminer
+    ports:
+      - "8080:8080"
+    networks:
+      - lacriminalite-network
+    depends_on:
+      - postgres
+
+networks:
+  lacriminalite-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:

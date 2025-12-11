@@ -1,0 +1,542 @@
+lacriminalite/
+├── apps/
+│   ├── web/                          # Next.js фронтенд (основное приложение)
+│   │   ├── app/
+│   │   │   ├── (auth)/               # Страницы аутентификации
+│   │   │   │   ├── login/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── register/
+│   │   │   │       └── page.tsx
+│   │   │   ├── (site)/               # Публичные страницы
+│   │   │   │   ├── layout.tsx
+│   │   │   │   ├── page.tsx
+│   │   │   │   ├── events/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── delivery/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── payment-methods/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── returns/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── contacts/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── privacy/
+│   │   │   │       └── page.tsx
+│   │   │   ├── cart/                 # Корзина
+│   │   │   │   └── page.tsx
+│   │   │   ├── checkout/             # Оформление заказа
+│   │   │   │   ├── page.tsx
+│   │   │   │   └── success/
+│   │   │   │       └── page.tsx
+│   │   │   ├── catalog/              # Каталог товаров
+│   │   │   │   ├── page.tsx
+│   │   │   │   ├── [collection]/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── product/
+│   │   │   │       └── [slug]/
+│   │   │   │           └── page.tsx
+│   │   │   ├── profile/              # Личный кабинет
+│   │   │   │   ├── page.tsx
+│   │   │   │   ├── orders/
+│   │   │   │   │   ├── page.tsx
+│   │   │   │   │   ├── active/
+│   │   │   │   │   │   └── page.tsx
+│   │   │   │   │   └── [id]/
+│   │   │   │   │       └── page.tsx
+│   │   │   │   ├── loyalty/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── addresses/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── settings/
+│   │   │   │       └── page.tsx
+│   │   │   ├── admin/                # Админ-панель (защищенная)
+│   │   │   │   ├── layout.tsx
+│   │   │   │   ├── page.tsx
+│   │   │   │   ├── products/
+│   │   │   │   │   ├── page.tsx
+│   │   │   │   │   ├── add/
+│   │   │   │   │   │   └── page.tsx
+│   │   │   │   │   └── [id]/
+│   │   │   │   │       └── edit/
+│   │   │   │   │           └── page.tsx
+│   │   │   │   ├── orders/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   ├── events/
+│   │   │   │   │   └── page.tsx
+│   │   │   │   └── analytics/
+│   │   │   │       └── page.tsx
+│   │   │   ├── api/                  # API Routes
+│   │   │   │   ├── auth/
+│   │   │   │   │   ├── [...nextauth]/
+│   │   │   │   │   │   └── route.ts
+│   │   │   │   │   └── register/
+│   │   │   │   │       └── route.ts
+│   │   │   │   ├── products/
+│   │   │   │   │   ├── route.ts
+│   │   │   │   │   └── [id]/
+│   │   │   │   │       └── route.ts
+│   │   │   │   ├── cart/
+│   │   │   │   │   ├── route.ts
+│   │   │   │   │   └── promo/
+│   │   │   │   │       └── route.ts
+│   │   │   │   ├── orders/
+│   │   │   │   │   ├── route.ts
+│   │   │   │   │   ├── [id]/
+│   │   │   │   │   │   └── route.ts
+│   │   │   │   │   └── track/
+│   │   │   │   │       └── route.ts
+│   │   │   │   ├── loyalty/
+│   │   │   │   │   └── route.ts
+│   │   │   │   ├── events/
+│   │   │   │   │   └── route.ts
+│   │   │   │   ├── admin/
+│   │   │   │   │   └── route.ts
+│   │   │   │   ├── webhooks/
+│   │   │   │   │   ├── yookassa/
+│   │   │   │   │   │   └── route.ts
+│   │   │   │   │   ├── sdek/
+│   │   │   │   │   │   └── route.ts
+│   │   │   │   │   └── telegram/
+│   │   │   │   │       └── route.ts
+│   │   │   │   └── upload/
+│   │   │   │       └── route.ts
+│   │   │   ├── layout.tsx            # Root layout
+│   │   │   ├── loading.tsx
+│   │   │   ├── error.tsx
+│   │   │   └── not-found.tsx
+│   │   ├── components/               # React компоненты
+│   │   │   ├── ui/                   # Базовые UI компоненты
+│   │   │   │   ├── Button/
+│   │   │   │   │   ├── Button.tsx
+│   │   │   │   │   ├── ButtonPrimary.tsx
+│   │   │   │   │   ├── ButtonSecondary.tsx
+│   │   │   │   │   └── ButtonIcon.tsx
+│   │   │   │   ├── Input/
+│   │   │   │   │   ├── Input.tsx
+│   │   │   │   │   ├── InputPassword.tsx
+│   │   │   │   │   └── InputSearch.tsx
+│   │   │   │   ├── Select/
+│   │   │   │   │   ├── Select.tsx
+│   │   │   │   │   └── SelectSize.tsx
+│   │   │   │   ├── Modal/
+│   │   │   │   │   ├── Modal.tsx
+│   │   │   │   │   ├── ModalCart.tsx
+│   │   │   │   │   └── ModalAuth.tsx
+│   │   │   │   ├── Tabs/
+│   │   │   │   │   └── Tabs.tsx
+│   │   │   │   ├── Badge/
+│   │   │   │   │   ├── Badge.tsx
+│   │   │   │   │   ├── BadgeNew.tsx
+│   │   │   │   │   ├── BadgeSale.tsx
+│   │   │   │   │   └── BadgeBestSeller.tsx
+│   │   │   │   ├── ProgressBar/
+│   │   │   │   │   └── ProgressBar.tsx
+│   │   │   │   ├── Countdown/
+│   │   │   │   │   └── Countdown.tsx
+│   │   │   │   ├── Accordion/
+│   │   │   │   │   └── Accordion.tsx
+│   │   │   │   ├── Loading/
+│   │   │   │   │   ├── Spinner.tsx
+│   │   │   │   │   ├── Skeleton.tsx
+│   │   │   │   │   └── SkeletonProduct.tsx
+│   │   │   │   └── Toast/
+│   │   │   │       └── Toast.tsx
+│   │   │   ├── layout/               # Компоненты макета
+│   │   │   │   ├── Header/
+│   │   │   │   │   ├── Header.tsx
+│   │   │   │   │   ├── LogoSection.tsx
+│   │   │   │   │   ├── Navigation.tsx
+│   │   │   │   │   ├── CatalogDropdown.tsx
+│   │   │   │   │   ├── UserMenu.tsx
+│   │   │   │   │   └── CartButton.tsx
+│   │   │   │   ├── Footer/
+│   │   │   │   │   ├── Footer.tsx
+│   │   │   │   │   ├── FooterLinks.tsx
+│   │   │   │   │   ├── FooterSocial.tsx
+│   │   │   │   │   └── FooterPayment.tsx
+│   │   │   │   ├── Sidebar/
+│   │   │   │   │   └── SidebarMobile.tsx
+│   │   │   │   └── Container/
+│   │   │   │       └── Container.tsx
+│   │   │   ├── catalog/              # Компоненты каталога
+│   │   │   │   ├── ProductCard/
+│   │   │   │   │   ├── ProductCard.tsx
+│   │   │   │   │   ├── ProductCardLimited.tsx
+│   │   │   │   │   └── ProductCardRegular.tsx
+│   │   │   │   ├── ProductGrid/
+│   │   │   │   │   └── ProductGrid.tsx
+│   │   │   │   ├── ProductFilters/
+│   │   │   │   │   ├── ProductFilters.tsx
+│   │   │   │   │   ├── FilterCollection.tsx
+│   │   │   │   │   ├── FilterCategory.tsx
+│   │   │   │   │   └── FilterPrice.tsx
+│   │   │   │   ├── ProductDetails/
+│   │   │   │   │   ├── ProductGallery.tsx
+│   │   │   │   │   ├── ProductInfo.tsx
+│   │   │   │   │   ├── ProductActions.tsx
+│   │   │   │   │   ├── SizeSelector.tsx
+│   │   │   │   │   └── QuantitySelector.tsx
+│   │   │   │   ├── StockCounter/
+│   │   │   │   │   ├── StockCounter.tsx
+│   │   │   │   │   └── StockBadge.tsx
+│   │   │   │   ├── CollectionTabs/
+│   │   │   │   │   └── CollectionTabs.tsx
+│   │   │   │   ├── CollectionHero/
+│   │   │   │   │   └── CollectionHero.tsx
+│   │   │   │   ├── CollectionFilters/
+│   │   │   │   │   └── CollectionFilters.tsx
+│   │   │   │   ├── RelatedProducts/
+│   │   │   │   │   └── RelatedProducts.tsx
+│   │   │   │   ├── CatalogLayout/
+│   │   │   │   │   └── CatalogLayout.tsx
+│   │   │   │   ├── CatalogSkeleton/
+│   │   │   │   │   └── CatalogSkeleton.tsx
+│   │   │   │   └── QuickViewModal/
+│   │   │   │       └── QuickViewModal.tsx
+│   │   │   ├── cart/                 # Компоненты корзины
+│   │   │   │   ├── CartItem/
+│   │   │   │   │   └── CartItem.tsx
+│   │   │   │   ├── CartSummary/
+│   │   │   │   │   └── CartSummary.tsx
+│   │   │   │   ├── CartEmpty/
+│   │   │   │   │   └── CartEmpty.tsx
+│   │   │   │   └── CartSidebar/
+│   │   │   │       └── CartSidebar.tsx
+│   │   │   ├── checkout/             # Компоненты оформления заказа
+│   │   │   │   ├── CheckoutProgress/
+│   │   │   │   │   └── CheckoutProgress.tsx
+│   │   │   │   ├── CheckoutForm/
+│   │   │   │   │   ├── CheckoutForm.tsx
+│   │   │   │   │   ├── StepShipping.tsx
+│   │   │   │   │   ├── StepPayment.tsx
+│   │   │   │   │   └── StepConfirmation.tsx
+│   │   │   │   ├── DeliveryMethods/
+│   │   │   │   │   ├── DeliveryMethods.tsx
+│   │   │   │   │   ├── DeliverySDEK.tsx
+│   │   │   │   │   └── DeliveryYandex.tsx
+│   │   │   │   ├── PaymentMethods/
+│   │   │   │   │   ├── PaymentMethods.tsx
+│   │   │   │   │   └── PaymentYooKassa.tsx
+│   │   │   │   ├── OrderSummary/
+│   │   │   │   │   └── OrderSummary.tsx
+│   │   │   │   └── AddressForm/
+│   │   │   │       └── AddressForm.tsx
+│   │   │   ├── profile/              # Компоненты профиля
+│   │   │   │   ├── ProfileHeader/
+│   │   │   │   │   └── ProfileHeader.tsx
+│   │   │   │   ├── ProfileMenu/
+│   │   │   │   │   └── ProfileMenu.tsx
+│   │   │   │   ├── ProfileForm/
+│   │   │   │   │   └── ProfileForm.tsx
+│   │   │   │   ├── OrderHistory/
+│   │   │   │   │   └── OrderHistory.tsx
+│   │   │   │   ├── OrderCard/
+│   │   │   │   │   └── OrderCard.tsx
+│   │   │   │   ├── OrderDetails/
+│   │   │   │   │   └── OrderDetails.tsx
+│   │   │   │   ├── OrderTracking/
+│   │   │   │   │   └── OrderTracking.tsx
+│   │   │   │   └── AddressForm/
+│   │   │   │       └── AddressForm.tsx
+│   │   │   ├── loyalty/              # Компоненты лояльности
+│   │   │   │   ├── LoyaltyProgress/
+│   │   │   │   │   └── LoyaltyProgress.tsx
+│   │   │   │   ├── LoyaltyLevels/
+│   │   │   │   │   └── LoyaltyLevels.tsx
+│   │   │   │   ├── LoyaltyBenefits/
+│   │   │   │   │   └── LoyaltyBenefits.tsx
+│   │   │   │   └── LoyaltyHistory/
+│   │   │   │       └── LoyaltyHistory.tsx
+│   │   │   ├── events/               # Компоненты событий
+│   │   │   │   ├── EventCard/
+│   │   │   │   │   └── EventCard.tsx
+│   │   │   │   ├── EventList/
+│   │   │   │   │   └── EventList.tsx
+│   │   │   │   └── EventDetails/
+│   │   │   │       └── EventDetails.tsx
+│   │   │   ├── admin/                # Компоненты админки
+│   │   │   │   ├── AdminSidebar/
+│   │   │   │   │   └── AdminSidebar.tsx
+│   │   │   │   ├── ProductForm/
+│   │   │   │   │   └── ProductForm.tsx
+│   │   │   │   ├── OrderTable/
+│   │   │   │   │   └── OrderTable.tsx
+│   │   │   │   └── AnalyticsChart/
+│   │   │   │       └── AnalyticsChart.tsx
+│   │   │   ├── marketing/            # Маркетинговые компоненты
+│   │   │   │   ├── Hero/
+│   │   │   │   │   └── Hero.tsx
+│   │   │   │   ├── Banner/
+│   │   │   │   │   └── Banner.tsx
+│   │   │   │   └── Newsletter/
+│   │   │   │       └── Newsletter.tsx
+│   │   │   └── shared/               # Общие компоненты
+│   │   │       ├── ErrorBoundary/
+│   │   │       │   └── ErrorBoundary.tsx
+│   │   │       ├── EmptyState/
+│   │   │       │   └── EmptyState.tsx
+│   │   │       ├── BackButton/
+│   │   │       │   └── BackButton.tsx
+│   │   │       ├── ImageUpload/
+│   │   │       │   └── ImageUpload.tsx
+│   │   │       └── Notification/
+│   │   │           └── Notification.tsx
+│   │   ├── hooks/                    # Кастомные React хуки
+│   │   │   ├── useCart.ts
+│   │   │   ├── useAuth.ts
+│   │   │   ├── useProducts.ts
+│   │   │   ├── useOrders.ts
+│   │   │   ├── useLoyalty.ts
+│   │   │   ├── useWishlist.ts
+│   │   │   ├── useDebounce.ts
+│   │   │   ├── useWindowSize.ts
+│   │   │   ├── useFormPersist.ts
+│   │   │   ├── useMediaQuery.ts
+│   │   │   └── useLocalStorage.ts
+│   │   ├── lib/                      # Библиотеки и сервисы
+│   │   │   ├── prisma.ts             # Prisma клиент
+│   │   │   ├── auth.ts               # NextAuth конфигурация
+│   │   │   ├── api/                  # API клиенты
+│   │   │   │   ├── client.ts
+│   │   │   │   ├── products.ts
+│   │   │   │   ├── cart.ts
+│   │   │   │   ├── orders.ts
+│   │   │   │   ├── loyalty.ts
+│   │   │   │   ├── events.ts
+│   │   │   │   ├── admin.ts
+│   │   │   │   └── auth.ts
+│   │   │   ├── services/             # Сервисы
+│   │   │   │   ├── cartService.ts
+│   │   │   │   ├── orderService.ts
+│   │   │   │   ├── productService.ts
+│   │   │   │   ├── loyaltyService.ts
+│   │   │   │   ├── yookassaService.ts
+│   │   │   │   ├── sdekService.ts
+│   │   │   │   ├── yandexDeliveryService.ts
+│   │   │   │   └── notificationService.ts
+│   │   │   ├── utils/                # Утилиты
+│   │   │   │   ├── format.ts
+│   │   │   │   ├── validation.ts
+│   │   │   │   ├── cookies.ts
+│   │   │   │   ├── storage.ts
+│   │   │   │   ├── debounce.ts
+│   │   │   │   └── file.ts
+│   │   │   ├── constants/            # Константы
+│   │   │   │   ├── paths.ts
+│   │   │   │   ├── collections.ts
+│   │   │   │   ├── categories.ts
+│   │   │   │   ├── sizes.ts
+│   │   │   │   ├── orderStatuses.ts
+│   │   │   │   └── loyaltyLevels.ts
+│   │   │   └── config/               # Конфигурации
+│   │   │       ├── site.ts
+│   │   │       ├── loyalty.ts
+│   │   │       └── payment.ts
+│   │   ├── types/                    # TypeScript типы
+│   │   │   ├── user.ts
+│   │   │   ├── product.ts
+│   │   │   ├── cart.ts
+│   │   │   ├── order.ts
+│   │   │   ├── loyalty.ts
+│   │   │   ├── event.ts
+│   │   │   └── api.ts
+│   │   ├── providers/                # React провайдеры
+│   │   │   ├── AuthProvider.tsx
+│   │   │   ├── CartProvider.tsx
+│   │   │   ├── LoyaltyProvider.tsx
+│   │   │   ├── ToastProvider.tsx
+│   │   │   └── ThemeProvider.tsx
+│   │   ├── styles/                   # Глобальные стили
+│   │   │   ├── globals.css
+│   │   │   ├── theme.css
+│   │   │   ├── components.css
+│   │   │   └── animations.css
+│   │   ├── public/                   # Статические файлы
+│   │   │   ├── images/
+│   │   │   │   ├── logos/
+│   │   │   │   │   ├── limited-logo.svg
+│   │   │   │   │   ├── limited-logo.png
+│   │   │   │   │   ├── regular-logo.svg
+│   │   │   │   │   └── regular-logo.png
+│   │   │   │   ├── products/
+│   │   │   │   ├── events/
+│   │   │   │   ├── banners/
+│   │   │   │   └── placeholders/
+│   │   │   ├── fonts/
+│   │   │   │   ├── Inter.woff2
+│   │   │   │   ├── Inter.woff
+│   │   │   │   └── Inter.ttf
+│   │   │   ├── favicon.ico
+│   │   │   ├── apple-touch-icon.png
+│   │   │   └── robots.txt
+│   │   ├── .env.local
+│   │   ├── .env.example
+│   │   ├── next.config.js
+│   │   ├── tailwind.config.js
+│   │   ├── postcss.config.js
+│   │   ├── tsconfig.json
+│   │   └── package.json
+│   └── bot/                          # Telegram бот (Node.js)
+│       ├── src/
+│       │   ├── index.ts              # Точка входа
+│       │   ├── bot.ts                # Инициализация бота
+│       │   ├── config/               # Конфигурация
+│       │   │   ├── constants.ts
+│       │   │   ├── keyboards.ts
+│       │   │   └── messages.ts
+│       │   ├── handlers/             # Обработчики команд
+│       │   │   ├── start.ts
+│       │   │   ├── auth.ts
+│       │   │   ├── menu.ts
+│       │   │   └── callback.ts
+│       │   ├── admin/                # Админские команды
+│       │   │   ├── products/
+│       │   │   │   ├── addProduct.ts
+│       │   │   │   ├── editProduct.ts
+│       │   │   │   ├── manageStock.ts
+│       │   │   │   └── listProducts.ts
+│       │   │   ├── events/
+│       │   │   │   ├── addEvent.ts
+│       │   │   │   ├── editEvent.ts
+│       │   │   │   └── listEvents.ts
+│       │   │   ├── orders/
+│       │   │   │   ├── listOrders.ts
+│       │   │   │   ├── viewOrder.ts
+│       │   │   │   ├── updateStatus.ts
+│       │   │   │   └── tracking.ts
+│       │   │   ├── stats/
+│       │   │   │   └── statistics.ts
+│       │   │   └── settings/
+│       │   │       └── settings.ts
+│       │   ├── services/             # Сервисы бота
+│       │   │   ├── productService.ts
+│       │   │   ├── orderService.ts
+│       │   │   ├── eventService.ts
+│       │   │   ├── notificationService.ts
+│       │   │   └── database.ts
+│       │   ├── utils/                # Утилиты
+│       │   │   ├── formatters.ts
+│       │   │   ├── validators.ts
+│       │   │   ├── helpers.ts
+│       │   │   └── logger.ts
+│       │   ├── types/                # Типы бота
+│       │   │   ├── bot.types.ts
+│       │   │   ├── session.types.ts
+│       │   │   └── admin.types.ts
+│       │   ├── middlewares/          # Мидлвары
+│       │   │   ├── auth.middleware.ts
+│       │   │   ├── session.middleware.ts
+│       │   │   └── logger.middleware.ts
+│       │   └── cron/                 # Cron задачи
+│       │       ├── archiveOrders.ts
+│       │       ├── updateTracking.ts
+│       │       └── sendNotifications.ts
+│       ├── .env
+│       ├── .env.example
+│       ├── tsconfig.json
+│       ├── package.json
+│       └── nodemon.json
+├── packages/                         # Общие пакеты (монопоиск)
+│   ├── database/                     # Prisma схема и клиент
+│   │   ├── src/
+│   │   │   ├── index.ts
+│   │   │   ├── prisma.ts
+│   │   │   └── seeds/
+│   │   │       ├── products.seed.ts
+│   │   │       ├── users.seed.ts
+│   │   │       └── loyalty.seed.ts
+│   │   ├── prisma/
+│   │   │   ├── schema.prisma
+│   │   │   └── migrations/
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   ├── shared/                       # Общие типы и утилиты
+│   │   ├── src/
+│   │   │   ├── types/
+│   │   │   │   ├── database.ts
+│   │   │   │   ├── api.ts
+│   │   │   │   ├── frontend.ts
+│   │   │   │   └── bot.ts
+│   │   │   ├── constants/
+│   │   │   │   ├── collections.ts
+│   │   │   │   ├── categories.ts
+│   │   │   │   ├── sizes.ts
+│   │   │   │   ├── orderStatuses.ts
+│   │   │   │   └── loyalty.ts
+│   │   │   ├── utils/
+│   │   │   │   ├── format.ts
+│   │   │   │   ├── validation.ts
+│   │   │   │   └── helpers.ts
+│   │   │   └── config/
+│   │   │       ├── site.config.ts
+│   │   │       └── loyalty.config.ts
+│   │   ├── package.json
+│   │   └── tsconfig.json
+│   └── api-client/                   # API клиент для фронтенда
+│       ├── src/
+│       │   ├── client.ts
+│       │   ├── endpoints/
+│       │   │   ├── products.ts
+│       │   │   ├── orders.ts
+│       │   │   ├── auth.ts
+│       │   │   └── loyalty.ts
+│       │   ├── types/
+│       │   │   └── responses.ts
+│       │   └── utils/
+│       │       └── errorHandler.ts
+│       ├── package.json
+│       └── tsconfig.json
+├── infrastructure/                   # Инфраструктура
+│   ├── docker/
+│   │   ├── Dockerfile.web
+│   │   ├── Dockerfile.bot
+│   │   └── nginx.conf
+│   ├── terraform/                    # Terraform для облака
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   └── outputs.tf
+│   └── kubernetes/                   # K8s манифесты
+│       ├── deployment-web.yaml
+│       ├── deployment-bot.yaml
+│       ├── service-web.yaml
+│       └── service-bot.yaml
+├── scripts/                          # Вспомогательные скрипты
+│   ├── setup-database.sh
+│   ├── deploy.sh
+│   ├── backup-database.sh
+│   ├── migrate-database.sh
+│   └── seed-database.sh
+├── docs/                             # Документация
+│   ├── api/
+│   │   ├── endpoints.md
+│   │   └── webhooks.md
+│   ├── database/
+│   │   └── schema.md
+│   ├── bot/
+│   │   └── commands.md
+│   └── deployment/
+│       └── guide.md
+├── docker-compose.yml                # Локальная разработка
+├── docker-compose.prod.yml           # Продакшен
+├── .env.example                      # Пример переменных окружения
+├── .gitignore
+├── .prettierrc
+├── .eslintrc.json
+├── tsconfig.base.json               # Базовый tsconfig
+├── package.json                     # Workspace root
+├── turbo.json                       # Turborepo конфиг
+├── LICENSE
+└── README.md
+
+
+База данных (Prisma Schema):
+model User { ... }
+model Product { ... }
+model Order { ... }
+model OrderItem { ... }
+model Loyalty { ... }
+model Event { ... }
+model CartItem { ... }
+model Address { ... }
+model PromoCode { ... }
+model Notification { ... }
