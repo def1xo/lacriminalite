@@ -12,8 +12,14 @@ model Product {
   updatedAt   DateTime @updatedAt
 }
 
+model StaticPage {
+id Int @id @default(autoincrement())
+slug String @unique
+title String
+content String @db.Text
+updatedAt DateTime @updatedAt
+}
 
-// опционально нормализованная таблица размеров (если нужна)
 model ProductSize {
   id         Int     @id @default(autoincrement())
   productId  Int

@@ -1,0 +1,26 @@
+.noise-wrapper {
+position: relative;
+overflow: hidden;
+}
+.noise-wrapper::after {
+content: '';
+position: absolute;
+inset: 0;
+pointer-events: none;
+background-image: url('/media/noise.png');
+opacity: 0.06;
+mix-blend-mode: multiply;
+animation: noise 8s steps(10) infinite;
+}
+@keyframes noise {
+0% { transform: translateY(0); }
+100% { transform: translateY(-50%); }
+}
+
+
+.hero-gif {
+display: block;
+width: 100%;
+max-height: 420px;
+object-fit: cover;
+}

@@ -8,6 +8,7 @@ import { AuthProvider } from '@/providers/AuthProvider';
 import { CartProvider } from '@/providers/CartProvider';
 import { LoyaltyProvider } from '@/providers/LoyaltyProvider';
 import '../styles/globals.css';
+import '@/app/styles/noise.css';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
@@ -86,7 +87,7 @@ export default function SiteLayout({
           <CartProvider>
             <LoyaltyProvider>
               <ToastProvider>
-                <div className="flex min-h-screen flex-col">
+                <div className="noise-wrapper flex min-h-screen flex-col">
                   <Header />
                   <main className="flex-1">
                     {children}
