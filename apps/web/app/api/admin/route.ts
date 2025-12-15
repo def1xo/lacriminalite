@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma'; // убедитесь, что prisma экспортируется как { prisma } или поправьте путь
 import fetch from 'node-fetch';
 
-const ADMIN_SECRET = process.env.ADMIN_API_SECRET;
+const SECRET = process.env.ADMIN_API_SECRET;
 const TELEGRAM_BOT_TOKEN = process.env.BOT_TOKEN;
 const TELEGRAM_ADMIN_CHAT_IDS = process.env.TELEGRAM_ADMIN_CHAT_IDS || process.env.TELEGRAM_ADMIN_CHAT_ID || '';
 
@@ -76,7 +76,6 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true, event: e });
     }
 
-    // другие административные действия...
     return NextResponse.json({ error: 'Unknown action' }, { status: 400 });
   } catch (err) {
     console.error('admin api error', err);
