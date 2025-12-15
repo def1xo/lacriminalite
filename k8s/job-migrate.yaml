@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: lacriminalite-migrate
+spec:
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+        - name: migrate
+          image: registry.example.com/lacriminalite-web:latest
+          command: ["sh", "-c", "pnpm prisma:migrate:deploy || pnpm prisma:migrate deploy"]
+          env:
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: lacriminalite-secrets
+                  key: DATABASE_URL
+            - name: PRISMA_MIGRATE_SKIP_GENERATE
+              value: "false"

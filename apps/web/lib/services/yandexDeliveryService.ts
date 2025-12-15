@@ -1,65 +1,56 @@
-// apps/web/lib/services/yandexDeliveryService.ts
-import fetch from 'node-fetch';
+const YD_BASE = process.env.YANDEX_DELIVERY_API_BASE || 'https://delivery.yandex.ru';
+const YD_OAUTH_TOKEN = process.env.YANDEX_DELIVERY_TOKEN || '';
 
-const YANDEX_BASE = process.env.YANDEX_DELIVERY_BASE || 'https://b2b.taxi.yandex.net';
-const YANDEX_TOKEN = process.env.YANDEX_DELIVERY_TOKEN;
-
-/**
- * Create claim (order) in Yandex Delivery
- * order - object with recipient, items, address, tariff info
- */
-export async function createYandexClaim(order: any) {
-  if (!YANDEX_TOKEN) throw new Error('YANDEX_DELIVERY_TOKEN not set');
-
-  const payload = {
-    // See Yandex Delivery docs: claims/create body
-    // We'll send minimal required fields; expand per your use-case.
-    external_id: order.orderNumber,
-    route: [
-      {
-        point: {
-          type: 'source',
-          contact: {
-            name: process.env.SENDER_NAME || 'La Criminalite',
-            phone: process.env.SENDER_PHONE || '',
-          },
-          address: {
-            formatted_address: process.env.SENDER_ADDRESS || '',
-          },
-        },
-      },
-      {
-        point: {
-          type: 'destination',
-          contact: {
-            name: order.fullName,
-            phone: order.phone,
-          },
-          address: {
-            formatted_address: order.address,
-          },
-        },
-      },
-    ],
-    // additional fields: parcels, items, etc.
-  };
-
-  const res = await fetch(`${YANDEX_BASE}/api/v2/claims`, {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${YANDEX_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-  });
-
-  const json = await res.json();
-  if (!res.ok) {
-    throw new Error('Yandex create claim failed: ' + JSON.stringify(json));
+export async function calculateYandexDelivery(payload: any) {
+  if (!YD_OAUTH_TOKEN) {
+    return { ok: false, mock: true, estimates: [{ service: 'STANDARD', price: 500, days: 5 }] };
   }
+  try {
+    const res = await fetch(`${YD_BASE}/api/v1/calculate`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${YD_OAUTH_TOKEN}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(JSON.stringify(json));
+    return { ok: true, data: json };
+  } catch (e: any) {
+    console.error('calculateYandexDelivery error', e);
+    return { ok: false, error: String(e) };
+  }
+}
 
-  return {
-    claimId: json.id || null,
-    raw: json,
-  };
+export async function createYandexClaim(orderPayload: any) {
+  if (!YD_OAUTH_TOKEN) {
+    return { ok: false, mock: true };
+  }
+  try {
+    const res = await fetch(`${YD_BASE}/api/v1/claims`, {
+      method: 'POST',
+      headers: { Authorization: `Bearer ${YD_OAUTH_TOKEN}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify(orderPayload)
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(JSON.stringify(json));
+    return { ok: true, raw: json, claimId: json.id || json.claim?.id || null };
+  } catch (e: any) {
+    console.error('createYandexClaim error', e);
+    return { ok: false, error: String(e) };
+  }
+}
+
+export async function getYandexClaimInfo(claimId: string) {
+  if (!YD_OAUTH_TOKEN) return { ok: false, mock: true };
+  try {
+    const res = await fetch(`${YD_BASE}/api/v1/claims/${claimId}`, {
+      method: 'GET',
+      headers: { Authorization: `Bearer ${YD_OAUTH_TOKEN}` }
+    });
+    const json = await res.json();
+    if (!res.ok) throw new Error(JSON.stringify(json));
+    return { ok: true, data: json };
+  } catch (e:any) {
+    console.error('getYandexClaimInfo error', e);
+    return { ok: false, error: String(e) };
+  }
 }

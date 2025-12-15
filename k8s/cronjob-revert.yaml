@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: lacriminalite-revert-reservations
+spec:
+  schedule: "*/10 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: revert
+              image: registry.example.com/lacriminalite-web:latest
+              command: ["node", "scripts/revert_reservations.js"]
+              env:
+                - name: DATABASE_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: lacriminalite-secrets
+                      key: DATABASE_URL
+                - name: ORDER_RESERVE_MINUTES
+                  value: "30"
+          ttlSecondsAfterFinished: 3600

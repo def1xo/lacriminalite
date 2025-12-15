@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lacriminalite-bot
+  labels:
+    app: lacriminalite-bot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lacriminalite-bot
+  template:
+    metadata:
+      labels:
+        app: lacriminalite-bot
+    spec:
+      containers:
+        - name: bot
+          image: registry.example.com/lacriminalite-bot:latest
+          env:
+            - name: BOT_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: lacriminalite-secrets
+                  key: BOT_TOKEN
+            - name: BOT_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: lacriminalite-secrets
+                  key: BOT_ADMIN_PASSWORD
+            - name: ADMIN_API_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: lacriminalite-secrets
+                  key: ADMIN_API_SECRET
+            - name: SITE_ADMIN_API
+              value: "https://lacriminalite.ru/api/admin"
+            - name: SITE_UPLOAD_API
+              value: "https://lacriminalite.ru/api/upload"
+            - name: NODE_ENV
+              value: "production"
+          ports:
+            - containerPort: 3002
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: "512Mi"

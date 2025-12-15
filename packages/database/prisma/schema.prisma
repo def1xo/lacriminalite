@@ -1,16 +1,29 @@
 model Product {
-  id          Int      @id @default(autoincrement())
-  slug        String   @unique
-  title       String
-  description String
-  price       Int
-  collection  String
-  images      Json
-  totalMade   Int
-  sizeStock   Json
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id         Int     @id @default(autoincrement())
+  title      String
+  slug       String  @unique
+  price      Int
+  sizeStock  Json?   @db.Json
+  images     Json?   @db.Json
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
 }
+
+model Order {
+  id          Int      @id @default(autoincrement())
+  orderNumber String   @unique
+  status      String
+  totalAmount Int
+  shippingCost Int?
+  items       OrderItem[]
+  userId      Int?
+  sdekTracking String?
+  paymentId   String?
+  expiresAt   DateTime?
+  canceledAt  DateTime?
+  createdAt   DateTime @default(now())
+}
+
 
 model StaticPage {
   id        Int      @id @default(autoincrement())
@@ -27,20 +40,4 @@ model ProductSize {
   quantity   Int
   product    Product @relation(fields: [productId], references: [id])
   @@unique([productId, size])
-}
-
-// обновление модели Order
-model Order {
-  id            Int       @id @default(autoincrement())
-  orderNumber   String    @unique
-  userId        Int?
-  status        String
-  totalAmount   Int
-  shippingCost  Int?
-  sdekTracking  String?   // трек или номер накладной СДЭК
-  sdekUuid      String?   // если СДЭК отдаёт uuid
-  paymentId     String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  items         OrderItem[]
 }
