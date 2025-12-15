@@ -13,11 +13,11 @@ model Product {
 }
 
 model StaticPage {
-id Int @id @default(autoincrement())
-slug String @unique
-title String
-content String @db.Text
-updatedAt DateTime @updatedAt
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  title     String
+  content   String   @db.Text
+  updatedAt DateTime @updatedAt
 }
 
 model ProductSize {

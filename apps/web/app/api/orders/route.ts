@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     const { cart, purchaser, address, shippingMethod } = body;
     if (!cart || !Array.isArray(cart.items) || !purchaser) return NextResponse.json({ error: 'invalid payload' }, { status: 400 });
 
-    const orderNumber = String(Date.now()); // simple unique orderNumber; can be improved
+    const orderNumber = String(Date.now());
     const itemsData = [];
 
     for (const c of cart.items) {
@@ -61,7 +61,6 @@ export async function POST(req: NextRequest) {
         shipment = { cdekNumber: shipRes.cdekNumber };
         await prisma.order.update({ where: { id: order.id }, data: { sdekTracking: shipRes.cdekNumber, sdekUuid: shipRes.uuid || null } });
       } else if (shipRes?.mock) {
-        // no token configured — leave blank
       } else {
         console.warn('sdek create failed', shipRes);
       }
